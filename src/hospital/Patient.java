@@ -1,19 +1,69 @@
 package hospital;
 
-public class Patient extends Person {
+import db.SQL;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-    private int ID;
+public class Patient extends Person implements SQL {
+
+    private int id;
     private String date;
     private String time;
 
-    public Patient(String name, String age) {
+    public Patient(String name, int age, int id, String date, String time) {
         super(name, age);
+        this.date = date;
+        this.time = time;
+        this.id = id;
     }
 
     public void print() {
-        System.out.println("ID : " + ID);
+        System.out.println("ID : " + id);
         System.out.println("Date : " + date);
         System.out.println("Time : " + time);
     }
 
+    //inserts into table 'Patient'
+    @Override
+    public void insert(Connection c) throws SQLException {
+        createStatement();
+        String query = "INSERT INTO Patient (id, name, age, date, time)" +
+                " VALUES (?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStmt = c.prepareStatement(query);
+        preparedStmt.setInt (1, this.id);
+        preparedStmt.setString (2, super.getName());
+        preparedStmt.setInt (3, super.getAge());
+        preparedStmt.setString (4, this.date);
+        preparedStmt.setString (5, this.time);
+        preparedStmt.execute();
+
+        System.out.println("Patient " + super.getName() + " added to table 'Patient'");
+    }
+
+    //returns all rows in table 'Patient'
+    public static List<String> returnAll() throws SQLException {
+        List<String> list = new ArrayList<String>();
+        createStatement();
+
+        String query = "SELECT * FROM Patient";
+        ResultSet rs = getStatement().executeQuery(query);
+        String id, name, age, date, time;
+
+        while (rs.next()) {
+            id = "id: " + rs.getString("id");
+            name = ", name: " + rs.getString("name");
+            age = ", age: " + rs.getString("age");
+            date = ", date: " + rs.getString("date");
+            time = ", time: " + rs.getString("time");
+
+            list.add(id + name + age + date + time);
+        }
+        return list;
+    }
+
+    public int getId() {
+        return id;
+    }
 }
