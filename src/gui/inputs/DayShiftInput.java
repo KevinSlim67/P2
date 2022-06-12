@@ -1,6 +1,7 @@
 package gui.inputs;
 
 import gui.components.ComboBoxField;
+import gui.components.DeleteButton;
 import gui.components.Field;
 import gui.components.SubmitButton;
 
@@ -25,12 +26,17 @@ public class DayShiftInput extends PersonInput {
         this.textFields.add(timeField.getTextField());
 
         SubmitButton submitButton = new SubmitButton("DayShift", this.textFields, this.comboBoxes);
-        submitButton.setBounds(20, getY(6), getFieldWidth(), getFieldHeight());
+        submitButton.setBounds(20, getY(6), (getFieldWidth() / 2) - 10, getFieldHeight());
+
+        DeleteButton deleteButton = new DeleteButton("DayShift", this.textFields, this.comboBoxes);
+        deleteButton.setBounds(20 + (getFieldWidth() / 2) + 10, getY(6),
+                (getFieldWidth() / 2) - 10, getFieldHeight());
 
         this.add(nurseIDField);
         this.add(departmentField);
         this.add(dateField);
         this.add(timeField);
         this.add(submitButton);
+        this.add(deleteButton);
     }
 }

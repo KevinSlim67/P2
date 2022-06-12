@@ -81,7 +81,7 @@ public class DayShift extends Nurse implements Hospital {
     @Override
     public void delete(Connection c) throws SQLException {
         setStatement(c.createStatement());
-        String query = "DELETE FROM Shift WHERE id = " + this.getId() + " AND shift = 'day'";
+        String query = "DELETE FROM Shift WHERE nurse_id = " + this.getId() + " AND shift = 'day'";
 
         PreparedStatement preparedStmt = c.prepareStatement(query);
         preparedStmt.execute();
