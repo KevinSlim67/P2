@@ -8,13 +8,13 @@ public class SurgeryPInput extends PersonInput {
     public SurgeryPInput() {
         super();
 
-        Field patientIDField = new Field("Patient ID", 20, 150, getFieldWidth(), getFieldHeight());
-        Field dateField = new Field("Date", 20, 210, getFieldWidth(), getFieldHeight());
-        Field timeField = new Field("Time", 20, 280, getFieldWidth(), getFieldHeight());
+        Field patientIDField = new Field("Patient ID", 20, getY(2), getFieldWidth(), getFieldHeight());
+        Field dateField = new Field("Date", 20, getY(3), getFieldWidth(), getFieldHeight());
+        Field timeField = new Field("Time", 20, getY(4), getFieldWidth(), getFieldHeight());
 
         String[] surgeryTypes = {"Heart", "Lung", "Brain", "Leg", "Arm"};
         ComboBoxField surgeryType = new ComboBoxField("Surgery Type",
-                20, 340, getFieldWidth(), getFieldHeight(), surgeryTypes);
+                20, getY(5), getFieldWidth(), getFieldHeight(), surgeryTypes);
 
         this.textFields.add(patientIDField.getTextField());
         this.textFields.add(dateField.getTextField());
@@ -22,7 +22,7 @@ public class SurgeryPInput extends PersonInput {
         this.comboBoxes.add(surgeryType);
 
         SubmitButton submitButton = new SubmitButton("SurgeryP", this.textFields, this.comboBoxes);
-        submitButton.setBounds(20, 400, getFieldWidth(), getFieldHeight());
+        submitButton.setBounds(20, getY(6), getFieldWidth(), getFieldHeight());
 
 
         this.add(patientIDField);

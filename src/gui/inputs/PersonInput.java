@@ -20,8 +20,8 @@ public abstract class PersonInput extends JPanel {
         this.setLayout(null);
         this.setOpaque(false); //makes background transparent
 
-        Field nameField = new Field("Name", 20, 30, fieldWidth, fieldHeight);
-        Field ageField = new Field("Age", 20, 90, fieldWidth, fieldHeight);
+        Field nameField = new Field("Name", 20, getY(0), fieldWidth, fieldHeight);
+        Field ageField = new Field("Age", 20, getY(1), fieldWidth, fieldHeight);
 
         //adding all the textfields of each field to this list, in order to access the data
         //when we press the submit button
@@ -38,5 +38,9 @@ public abstract class PersonInput extends JPanel {
 
     public int getFieldWidth() {
         return fieldWidth;
+    }
+
+    int getY(int increment) {
+        return 20 + (60 * increment);
     }
 }
