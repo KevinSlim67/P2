@@ -30,7 +30,7 @@ public class NightShift extends Nurse implements Hospital {
         preparedStmt.setString (4, "night");
         preparedStmt.execute();
 
-        System.out.println("Nurse " + super.getName() +  "' with Night Shift added to table 'Shift'");
+        System.out.println("Nurse '" + super.getId() +  "' with Night Shift added to table 'Shift'");
     }
 
     //inserts existing nurse into table 'Shift'
@@ -50,7 +50,7 @@ public class NightShift extends Nurse implements Hospital {
                 preparedStmt.setString (4, "night");
                 preparedStmt.execute();
 
-                System.out.println("Nurse " + super.getName() +  "' with Night Shift added to table 'Shift'");
+                System.out.println("Nurse " + super.getId() +  "' with Night Shift added to table 'Shift'");
                 return;
             }
         }
@@ -79,7 +79,7 @@ public class NightShift extends Nurse implements Hospital {
     }
 
     @Override
-    public void getMedication() {
-
+    public String getMedication() {
+        return null;
     }
 }

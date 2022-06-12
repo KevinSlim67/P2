@@ -17,7 +17,7 @@ public class Field extends JPanel {
 
         textField = new JTextField();
         textField.setFont(new Font("Calibri", Font.PLAIN,18));
-        textField.setMargin(new Insets(10, 10, 10, 10));
+        textField.setMargin(new Insets(10, 10, 10, 10)); //adds padding
 
         this.add(label, BorderLayout.WEST);
         this.add(textField, BorderLayout.CENTER);

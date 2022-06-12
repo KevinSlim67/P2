@@ -31,7 +31,7 @@ public class Nurse extends Person implements SQL {
         preparedStmt.setString (4, this.department);
         preparedStmt.execute();
 
-        System.out.println("Nurse " + super.getName() + " added to table 'Nurse'");
+        System.out.println("Nurse " + this.getId() + " added to table 'Nurse'");
     }
 
     //returns all rows in table 'Nurse'

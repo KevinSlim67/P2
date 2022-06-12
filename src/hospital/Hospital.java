@@ -1,5 +1,5 @@
 package hospital;
 
 public interface Hospital {
-    public abstract void getMedication();
+    public abstract String getMedication();
 }

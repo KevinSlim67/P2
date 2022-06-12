@@ -13,11 +13,13 @@ import java.util.List;
 public class SubmitButton extends JButton {
 
     private List<JTextField> textFields;
+    private List<ComboBoxField> comboBoxes;
     private String table;
 
-    public SubmitButton(String table ,List<JTextField> textFields) {
+    public SubmitButton(String table, List<JTextField> textFields, List<ComboBoxField> comboBoxes) {
         this.table = table;
         this.textFields = textFields;
+        this.comboBoxes = comboBoxes;
         this.setBackground(new Color(0xffe7c3));
         this.setFont(new Font("Calibri", Font.PLAIN, 18));
         this.setBorder(BorderFactory.createEtchedBorder());
@@ -73,7 +75,7 @@ public class SubmitButton extends JButton {
         String name = textFields.get(0).getText();
         int age = Integer.valueOf(textFields.get(1).getText());
         int id = Integer.valueOf(textFields.get(2).getText());
-        String department = textFields.get(3).getText();
+        String department = comboBoxes.get(0).getSelectedItem().toString();
         Nurse nurse = new Nurse(name, age, id, department);
 
         Connection connection = DB.connectToDatabase();
@@ -85,7 +87,7 @@ public class SubmitButton extends JButton {
         String name = textFields.get(0).getText();
         int age = Integer.valueOf(textFields.get(1).getText());
         int id = Integer.valueOf(textFields.get(2).getText());
-        String spec = textFields.get(3).getText();
+        String spec = comboBoxes.get(0).getSelectedItem().toString();
         Doctor doctor = new Doctor(name, age, id, spec);
 
         Connection connection = DB.connectToDatabase();
@@ -100,10 +102,11 @@ public class SubmitButton extends JButton {
         int id = Integer.valueOf(textFields.get(2).getText());
         String date = textFields.get(3).getText();
         String time = textFields.get(4).getText();
-        String treatementType = textFields.get(5).getText();
+        String treatementType = comboBoxes.get(0).getSelectedItem().toString();
         TreatementP treatementP = new TreatementP(name, age, id, date, time, treatementType);
 
         Connection connection = DB.connectToDatabase();
+
         if (treatementP.searchTable(connection)) {
             treatementP.insertExisting(connection);
         } else {
@@ -120,10 +123,11 @@ public class SubmitButton extends JButton {
         int id = Integer.valueOf(textFields.get(2).getText());
         String date = textFields.get(3).getText();
         String time = textFields.get(4).getText();
-        String surgeryType = textFields.get(5).getText();
+        String surgeryType = comboBoxes.get(0).getSelectedItem().toString();
         SurgeryP surgeryP = new SurgeryP(name, age, id, date, time, surgeryType);
 
         Connection connection = DB.connectToDatabase();
+
         if (surgeryP.searchTable(connection)) {
             surgeryP.insertExisting(connection);
         } else {
@@ -138,9 +142,9 @@ public class SubmitButton extends JButton {
         String name = textFields.get(0).getText();
         int age = Integer.valueOf(textFields.get(1).getText());
         int id = Integer.valueOf(textFields.get(2).getText());
-        String department = textFields.get(3).getText();
-        String date = textFields.get(4).getText();
-        String time = textFields.get(5).getText();
+        String department = comboBoxes.get(0).getSelectedItem().toString();
+        String date = textFields.get(3).getText();
+        String time = textFields.get(4).getText();
 
         Connection connection = DB.connectToDatabase();
 
@@ -160,8 +164,6 @@ public class SubmitButton extends JButton {
                 nightShift.insert(connection);
             }
         }
-
-
 
         connection.close();
     }

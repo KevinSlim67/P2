@@ -39,7 +39,7 @@ public class Patient extends Person implements SQL {
         preparedStmt.setString (5, this.time);
         preparedStmt.execute();
 
-        System.out.println("Patient " + super.getName() + " added to table 'Patient'");
+        System.out.println("Patient " + this.getId() + " added to table 'Patient'");
     }
 
     //returns all rows in table 'Patient'

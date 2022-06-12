@@ -26,7 +26,7 @@ public class SurgeryP extends Patient implements Hospital {
         preparedStmt.execute();
 
         System.out.println("Surgery '" + this.surgeryType +  "' for " +
-                "Patient '" + super.getName() + "' added to table 'SurgeryP'");
+                "Patient '" + super.getId() + "' added to table 'SurgeryP'");
     }
 
     //inserts existing patient into table 'SurgeryP'
@@ -44,7 +44,7 @@ public class SurgeryP extends Patient implements Hospital {
                 preparedStmt.execute();
 
                 System.out.println("Surgery '" + this.surgeryType +  "' for " +
-                        "Patient '" + super.getName() + "' added to table 'SurgeryP'");
+                        "Patient '" + super.getId() + "' added to table 'SurgeryP'");
                 return;
             }
         }
@@ -70,7 +70,15 @@ public class SurgeryP extends Patient implements Hospital {
     }
 
     @Override
-    public void getMedication() {
+    public String getMedication() {
+        if (surgeryType.equals("Heart")) {
+            return "Fentanyl";
+        } else if (surgeryType.equals("Brain")) {
+            return "Steroids";
+        } else if (surgeryType.equals("Arm") || surgeryType.equals("Leg")) {
+            return "Ibuprofen";
+        }
 
+        return null;
     }
 }

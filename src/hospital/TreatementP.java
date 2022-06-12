@@ -29,7 +29,7 @@ public class TreatementP extends Patient implements Hospital, SQL {
         preparedStmt.execute();
 
         System.out.println("Surgery '" + this.treatementType +  "' for " +
-                "Patient '" + super.getName() + "' added to table 'TreatementP'");
+                "Patient '" + super.getId() + "' added to table 'TreatementP'");
     }
 
     //inserts existing patient into table 'TreatementP'
@@ -48,7 +48,7 @@ public class TreatementP extends Patient implements Hospital, SQL {
                 preparedStmt.execute();
 
                 System.out.println("Treatement '" + this.treatementType +  "' for " +
-                        "Patient '" + super.getName() + "' added to table 'TreatementP'");
+                        "Patient '" + super.getId() + "' added to table 'TreatementP'");
                 return;
             }
         }
@@ -74,8 +74,16 @@ public class TreatementP extends Patient implements Hospital, SQL {
     }
 
     @Override
-    public void getMedication() {
+    public String getMedication() {
+        if (treatementType.equals("Chemotherapy")) {
+            return "Alkylating agents";
+        } else if (treatementType.equals("Immunotherapy")) {
+            return "Ipilimumab";
+        } else if (treatementType.equals("Radiation")) {
+            return "Potassium Iodide";
+        }
 
+        return null;
     }
 
     public String getTreatementType() {

@@ -30,7 +30,7 @@ public class DayShift extends Nurse implements Hospital {
         preparedStmt.setString (4, "day");
         preparedStmt.execute();
 
-        System.out.println("Nurse " + super.getName() +  "' with Day Shift added to table 'Shift'");
+        System.out.println("Nurse " + super.getId() +  "' with Day Shift added to table 'Shift'");
     }
 
     //inserts existing nurse into table 'Shift'
@@ -50,7 +50,7 @@ public class DayShift extends Nurse implements Hospital {
                 preparedStmt.setString (4, "day");
                 preparedStmt.execute();
 
-                System.out.println("Nurse " + super.getName() +  "' with Day Shift added to table 'Shift'");
+                System.out.println("Nurse '" + super.getId() +  "' with Day Shift added to table 'Shift'");
                 return;
             }
         }
@@ -79,7 +79,7 @@ public class DayShift extends Nurse implements Hospital {
     }
 
     @Override
-    public void getMedication() {
-
+    public String getMedication() {
+        return null;
     }
 }

@@ -15,7 +15,7 @@ public class PatientInput extends PersonInput {
         this.textFields.add(dateField.getTextField());
         this.textFields.add(timeField.getTextField());
 
-        SubmitButton submitButton = new SubmitButton("Patient", this.textFields);
+        SubmitButton submitButton = new SubmitButton("Patient", this.textFields, this.comboBoxes);
         submitButton.setBounds(20, 340, getFieldWidth(), getFieldHeight());
 
 

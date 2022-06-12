@@ -1,5 +1,6 @@
 package gui.inputs;
 
+import gui.components.ComboBoxField;
 import gui.components.Field;
 
 import javax.swing.*;
@@ -9,10 +10,12 @@ import java.util.ArrayList;
 
 public abstract class PersonInput extends JPanel {
     List<JTextField> textFields;
+    List<ComboBoxField> comboBoxes;
     final int fieldWidth = 400;
     final int fieldHeight = 40;
     public PersonInput() {
         textFields = new ArrayList<JTextField>();
+        comboBoxes = new ArrayList<ComboBoxField>();
 
         this.setLayout(null);
         this.setBackground(new Color(0xfff8f2)); //changes background color
