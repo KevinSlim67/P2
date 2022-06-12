@@ -1,24 +1,23 @@
 package gui.panels;
 
+import gui.output.Output;
+
 import javax.swing.JPanel;
 import java.awt.*;
 
 public class Form extends JPanel {
-    private InputData inputPanel;
+    private ResultPanel resultPanel;
+    private Output outputPanel;
 
     public Form() {
-        this.setBackground(Color.white); //changes background color
+        this.setBackground(new Color(0xfff8f2)); //changes background color
         this.setLayout(new BorderLayout());
 
-        inputPanel = new InputData();
-        this.add(inputPanel, BorderLayout.CENTER);
+        resultPanel = new ResultPanel();
+        this.add(resultPanel, BorderLayout.CENTER);
 
-        SelectAction selectPanel = new SelectAction(inputPanel);
+        SelectAction selectPanel = new SelectAction(resultPanel);
         this.add(selectPanel, BorderLayout.NORTH);
 
-    }
-
-    public InputData getInputPanel() {
-        return inputPanel;
     }
 }

@@ -13,6 +13,7 @@ public class DB {
 
     public static void main(String[] args) throws SQLException {
         connection = connectToDatabase();
+        printList(SurgeryP.returnAll(connection));
         closeConnection();
     }
 

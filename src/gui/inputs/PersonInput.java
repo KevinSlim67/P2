@@ -18,7 +18,7 @@ public abstract class PersonInput extends JPanel {
         comboBoxes = new ArrayList<ComboBoxField>();
 
         this.setLayout(null);
-        this.setBackground(new Color(0xfff8f2)); //changes background color
+        this.setOpaque(false); //makes background transparent
 
         Field nameField = new Field("Name", 20, 30, fieldWidth, fieldHeight);
         Field ageField = new Field("Age", 20, 90, fieldWidth, fieldHeight);

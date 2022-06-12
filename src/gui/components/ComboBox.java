@@ -1,7 +1,8 @@
 package gui.components;
 
 import gui.inputs.*;
-import gui.panels.InputData;
+import gui.output.Output;
+import gui.panels.ResultPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,16 +10,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-public class ComboBox extends JComboBox implements ActionListener {
-    private InputData inputPanel;
-    private String[] classes;
+import static javax.swing.SwingConstants.CENTER;
 
-    public ComboBox(String[] items, InputData inputPanel) {
-        this.inputPanel = inputPanel;
+public class ComboBox extends JComboBox implements ActionListener {
+    private ResultPanel resultPanel;
+    private String[] classes;
+    private boolean isInput = true;
+
+    public ComboBox(String[] items, ResultPanel resultPanel) {
+        this.resultPanel = resultPanel;
         this.classes = Arrays.copyOf(items, items.length);
         this.setPreferredSize(new Dimension(200, 50));
-        this.setFont(new Font("Calibri", Font.PLAIN, 20));
-        this.setForeground(new Color(0xa76300));
+        this.setFont(new Font("Calibri", Font.PLAIN, 18));
+        this.setBackground(new Color(0xffe7c3));
+        this.setForeground(new Color(0x402e32));
+
+        //centers items in the list
+        DefaultListCellRenderer listRenderer = new DefaultListCellRenderer();
+        listRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER); // center-aligned items
+        this.setRenderer(listRenderer);
 
         for (int i = 0; i < items.length; i++) {
             this.addItem(items[i]);
@@ -29,23 +39,45 @@ public class ComboBox extends JComboBox implements ActionListener {
     //what happens when you select a value from the combo box
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this) {
-            inputPanel.removeAll();
-            if (this.getSelectedItem().equals(classes[0])) {
-                inputPanel.add(new PatientInput(), BorderLayout.CENTER);
-            } else if (this.getSelectedItem().equals(classes[1])) {
-                inputPanel.add(new NurseInput(), BorderLayout.CENTER);
-            } else if (this.getSelectedItem().equals(classes[2])) {
-                inputPanel.add(new DoctorInput(), BorderLayout.CENTER);
-            } else if (this.getSelectedItem().equals(classes[3])) {
-                inputPanel.add(new TreatementPInput(), BorderLayout.CENTER);
-            } else if (this.getSelectedItem().equals(classes[4])) {
-                inputPanel.add(new SurgeryPInput(), BorderLayout.CENTER);
-            } else if (this.getSelectedItem().equals(classes[5])) {
-                inputPanel.add(new DayShiftInput(), BorderLayout.CENTER);
-            } else if (this.getSelectedItem().equals(classes[6])) {
-                inputPanel.add(new NightShiftInput(), BorderLayout.CENTER);
+            resultPanel.removeAll();
+            if (isInput) {
+                inputPanels();
+            } else {
+                outputPanels();
             }
-            inputPanel.revalidate();
+            resultPanel.revalidate();
+            resultPanel.repaint();
         }
+    }
+
+    private void inputPanels() {
+        if (this.getSelectedItem().equals(classes[0])) {
+            resultPanel.add(new PatientInput(), BorderLayout.CENTER);
+        } else if (this.getSelectedItem().equals(classes[1])) {
+            resultPanel.add(new NurseInput(), BorderLayout.CENTER);
+        } else if (this.getSelectedItem().equals(classes[2])) {
+            resultPanel.add(new DoctorInput(), BorderLayout.CENTER);
+        } else if (this.getSelectedItem().equals(classes[3])) {
+            resultPanel.add(new TreatementPInput(), BorderLayout.CENTER);
+        } else if (this.getSelectedItem().equals(classes[4])) {
+            resultPanel.add(new SurgeryPInput(), BorderLayout.CENTER);
+        } else if (this.getSelectedItem().equals(classes[5])) {
+            resultPanel.add(new DayShiftInput(), BorderLayout.CENTER);
+        } else if (this.getSelectedItem().equals(classes[6])) {
+            resultPanel.add(new NightShiftInput(), BorderLayout.CENTER);
+        }
+    }
+
+    private void outputPanels() {
+        String className = this.getSelectedItem().toString();
+        resultPanel.add(new Output(className));
+    }
+
+    public boolean isInput() {
+        return isInput;
+    }
+
+    public void setInput(boolean input) {
+        isInput = input;
     }
 }

@@ -8,7 +8,7 @@ public class Field extends JPanel {
 
     public Field(String name, int x, int y, int width, int height) {
         this.setLayout(new BorderLayout(30, 0));
-        this.setBackground(new Color(0xfff8f2));
+        this.setOpaque(false);
         this.setBounds(x, y, width, height);
 
         JLabel label = new JLabel();
