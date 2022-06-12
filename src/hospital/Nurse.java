@@ -70,6 +70,17 @@ public class Nurse extends Person implements SQL {
         return false;
     }
 
+    @Override
+    public void delete(Connection c) throws SQLException {
+        setStatement(c.createStatement());
+        String query = "DELETE FROM Nurse WHERE id = " + this.getId();
+
+        PreparedStatement preparedStmt = c.prepareStatement(query);
+        preparedStmt.execute();
+
+        System.out.println("Nurse " + this.getId() + " deleted from table 'Patient'");
+    }
+
     public int getId() {
         return id;
     }

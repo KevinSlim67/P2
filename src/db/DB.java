@@ -13,7 +13,8 @@ public class DB {
 
     public static void main(String[] args) throws SQLException {
         connection = connectToDatabase();
-        printList(SurgeryP.returnAll(connection));
+        Patient p = new Patient("s", 1, 6, "12", "12");
+        p.delete(connection);
         closeConnection();
     }
 

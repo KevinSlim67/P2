@@ -11,8 +11,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import static db.DB.connection;
-
 public class Output extends JPanel {
     private String className;
     JLabel label = new JLabel();

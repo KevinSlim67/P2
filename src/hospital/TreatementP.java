@@ -74,6 +74,17 @@ public class TreatementP extends Patient implements Hospital, SQL {
     }
 
     @Override
+    public void delete(Connection c) throws SQLException {
+        setStatement(c.createStatement());
+        String query = "DELETE FROM SurgeryP WHERE id = " + this.getId();
+
+        PreparedStatement preparedStmt = c.prepareStatement(query);
+        preparedStmt.execute();
+
+        System.out.println("Patient " + this.getId() + " deleted from table 'SurgeryP'");
+    }
+
+    @Override
     public String getMedication() {
         if (treatementType.equals("Chemotherapy")) {
             return "Alkylating agents";
@@ -84,13 +95,5 @@ public class TreatementP extends Patient implements Hospital, SQL {
         }
 
         return null;
-    }
-
-    public String getTreatementType() {
-        return treatementType;
-    }
-
-    public void setTreatementType(String treatementType) {
-        this.treatementType = treatementType;
     }
 }

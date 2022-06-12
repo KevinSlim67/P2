@@ -12,4 +12,6 @@ public interface SQL {
         return null;
     }
 
+    public void delete(Connection c) throws SQLException;
+
 }
