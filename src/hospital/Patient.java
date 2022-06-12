@@ -27,7 +27,7 @@ public class Patient extends Person implements SQL {
     //inserts into table 'Patient'
     @Override
     public void insert(Connection c) throws SQLException {
-        createStatement();
+        setStatement(c.createStatement());
         String query = "INSERT INTO Patient (id, name, age, date, time)" +
                 " VALUES (?, ?, ?, ?, ?)";
 
@@ -43,9 +43,9 @@ public class Patient extends Person implements SQL {
     }
 
     //returns all rows in table 'Patient'
-    public static List<String> returnAll() throws SQLException {
+    public static List<String> returnAll(Connection c) throws SQLException {
         List<String> list = new ArrayList<String>();
-        createStatement();
+        setStatement(c.createStatement());
 
         String query = "SELECT * FROM Patient";
         ResultSet rs = getStatement().executeQuery(query);
@@ -61,6 +61,21 @@ public class Patient extends Person implements SQL {
             list.add(id + name + age + date + time);
         }
         return list;
+    }
+
+    //searches if a record with this current id exists in the associated table
+    public boolean searchTable(Connection c) throws SQLException {
+        setStatement(c.createStatement());
+
+        List<String> list = returnAll(c);
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).contains("id: " + this.getId() + ",")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public int getId() {

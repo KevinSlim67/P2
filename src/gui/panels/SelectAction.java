@@ -10,7 +10,7 @@ public class SelectAction extends JPanel {
 
     public SelectAction(InputData inputPanel) {
         this.setPreferredSize(new Dimension(100, 100));
-        this.setBackground(new Color(0xffeab9));
+        this.setBackground(new Color(0xfff3d6));
 
         String[] items = {"Patient", "Nurse", "Doctor", "TreatementP", "SurgeryP", "DayShift", "NightShift"};
         ComboBox comboBox = new ComboBox(items, inputPanel);

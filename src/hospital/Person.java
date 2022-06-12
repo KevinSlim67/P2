@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Person implements SQL{
+public abstract class Person implements SQL {
     private String name;
     private int age;
     private static Statement statement;
@@ -24,21 +24,21 @@ public abstract class Person implements SQL{
 
     //inserts current instance of Person to table 'Person'
     public void insert(Connection c) throws SQLException {
-        createStatement();
+        setStatement(c.createStatement());
         String query = "INSERT INTO person (name, age) VALUES (?, ?)";
 
         PreparedStatement preparedStmt = c.prepareStatement(query);
-        preparedStmt.setString (1, this.name);
-        preparedStmt.setInt (2, this.age);
+        preparedStmt.setString(1, this.name);
+        preparedStmt.setInt(2, this.age);
 
         preparedStmt.execute();
-        System.out.println("Person '" + this.name +"' added to table 'Person'");
+        System.out.println("Person '" + this.name + "' added to table 'Person'");
     }
 
     //returns all rows in table 'Person'
-    public static List<String> returnAll() throws SQLException {
+    public static List<String> returnAll(Connection c) throws SQLException {
         List<String> list = new ArrayList<String>();
-        createStatement();
+        setStatement(c.createStatement());
 
         String query = "SELECT * FROM Person";
         ResultSet rs = statement.executeQuery(query);
@@ -54,14 +54,7 @@ public abstract class Person implements SQL{
         return list;
     }
 
-    //creates a statement that lets us make SQL queries
-    public static void createStatement() {
-        try {
-            statement = DB.connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public String getName() {
         return name;
@@ -81,5 +74,9 @@ public abstract class Person implements SQL{
 
     public static Statement getStatement() {
         return statement;
+    }
+
+    public static void setStatement(Statement statement) {
+        Person.statement = statement;
     }
 }

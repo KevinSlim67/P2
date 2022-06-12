@@ -35,11 +35,12 @@ public class DayShift extends Nurse implements Hospital {
 
     //inserts existing nurse into table 'Shift'
     public void insertExisting(Connection c) throws SQLException {
+        setStatement(c.createStatement());
 
         String query = "INSERT INTO Shift (nurse_id, date, time, shift)" +
                 " VALUES (?, ?, ?, ?)";
 
-        List<String> records = super.returnAll();
+        List<String> records = super.returnAll(c);
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).contains("id: " + this.getId() + ",")) {
                 PreparedStatement preparedStmt = c.prepareStatement(query);
@@ -57,9 +58,9 @@ public class DayShift extends Nurse implements Hospital {
     }
 
     //returns all rows where shift = 'day' in table 'Shift'
-    public static List<String> returnAll() throws SQLException {
+    public static List<String> returnAll(Connection c) throws SQLException {
         List<String> list = new ArrayList<String>();
-        createStatement();
+        setStatement(c.createStatement());
 
         String query = "SELECT * FROM Shift WHERE shift = 'day'";
         ResultSet rs = getStatement().executeQuery(query);

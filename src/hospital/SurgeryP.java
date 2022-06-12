@@ -35,7 +35,7 @@ public class SurgeryP extends Patient implements Hospital {
         String query = "INSERT INTO SurgeryP (surgery_type, patient_id)" +
                 " VALUES (?, ?)";
 
-        List<String> records = super.returnAll();
+        List<String> records = super.returnAll(c);
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).contains("id: " + this.getId() + ",")) {
                 PreparedStatement preparedStmt = c.prepareStatement(query);
@@ -52,9 +52,9 @@ public class SurgeryP extends Patient implements Hospital {
     }
 
     //returns all rows in table 'SurgeryP'
-    public static List<String> returnAll() throws SQLException {
+    public static List<String> returnAll(Connection c) throws SQLException {
         List<String> list = new ArrayList<String>();
-        createStatement();
+        setStatement(c.createStatement());
 
         String query = "SELECT * FROM SurgeryP";
         ResultSet rs = getStatement().executeQuery(query);

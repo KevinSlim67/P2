@@ -34,11 +34,12 @@ public class TreatementP extends Patient implements Hospital, SQL {
 
     //inserts existing patient into table 'TreatementP'
     public void insertExisting(Connection c) throws SQLException {
+        setStatement(c.createStatement());
 
         String query = "INSERT INTO TreatementP (treatement_type, patient_id)" +
                 " VALUES (?, ?)";
 
-        List<String> records = super.returnAll();
+        List<String> records = super.returnAll(c);
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).contains("id: " + this.getId() + ",")) {
                 PreparedStatement preparedStmt = c.prepareStatement(query);
@@ -55,9 +56,9 @@ public class TreatementP extends Patient implements Hospital, SQL {
     }
 
     //returns all rows in table 'TreatementP'
-    public static List<String> returnAll() throws SQLException {
+    public static List<String> returnAll(Connection c) throws SQLException {
         List<String> list = new ArrayList<String>();
-        createStatement();
+        setStatement(c.createStatement());
 
         String query = "SELECT * FROM TreatementP";
         ResultSet rs = getStatement().executeQuery(query);
