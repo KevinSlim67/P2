@@ -72,12 +72,13 @@ public class SurgeryP extends Patient implements Hospital {
     @Override
     public void delete(Connection c) throws SQLException {
         setStatement(c.createStatement());
-        String query = "DELETE FROM SurgeryP WHERE patient_id = " + this.getId();
+        String query = "DELETE FROM SurgeryP WHERE patient_id = " + this.getId() + " AND " +
+                "surgery_type = '" + this.surgeryType + "'";
 
         PreparedStatement preparedStmt = c.prepareStatement(query);
         preparedStmt.execute();
 
-        System.out.println("Patient " + this.getId() + " deleted from table 'SurgeryP'");
+        System.out.println("Patient " + this.getId() + " with Surgery '" + this.surgeryType + "' deleted from table 'SurgeryP'");
     }
 
     @Override
@@ -88,6 +89,8 @@ public class SurgeryP extends Patient implements Hospital {
             return "Steroids";
         } else if (surgeryType.equals("Arm") || surgeryType.equals("Leg")) {
             return "Ibuprofen";
+        } else if (surgeryType.equals("Lung")) {
+            return "Bronchodilators";
         }
 
         return null;
