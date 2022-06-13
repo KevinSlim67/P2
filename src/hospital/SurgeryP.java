@@ -51,12 +51,12 @@ public class SurgeryP extends Patient implements Hospital {
         System.out.println("Did not find a record in the database with this ID!");
     }
 
-    //returns all rows in table 'SurgeryP'
+    //returns all rows in table 'SurgeryP' and orders them by patient_id
     public static List<String> returnAll(Connection c) throws SQLException {
         List<String> list = new ArrayList<String>();
         setStatement(c.createStatement());
 
-        String query = "SELECT * FROM SurgeryP";
+        String query = "SELECT * FROM SurgeryP ORDER BY patient_id ASC";
         ResultSet rs = getStatement().executeQuery(query);
         String id, surgeryType;
 

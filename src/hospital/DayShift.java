@@ -57,12 +57,12 @@ public class DayShift extends Nurse implements Hospital {
         System.out.println("Did not find a record in the database with this ID!");
     }
 
-    //returns all rows where shift = 'day' in table 'Shift'
+    //returns all rows where shift = 'day' in table 'Shift' and orders them by nurse_id
     public static List<String> returnAll(Connection c) throws SQLException {
         List<String> list = new ArrayList<String>();
         setStatement(c.createStatement());
 
-        String query = "SELECT * FROM Shift WHERE shift = 'day'";
+        String query = "SELECT * FROM Shift WHERE shift = 'day' ORDER BY nurse_id ASC";
         ResultSet rs = getStatement().executeQuery(query);
         String id, date, time, shift;
 
